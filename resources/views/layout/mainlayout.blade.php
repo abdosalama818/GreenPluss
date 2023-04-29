@@ -63,13 +63,13 @@
                                 </span>
                     </a>
                     <a href="index.html" class="navbar-brand logo">
-                        <img style="width: 142px;" src="assets2/img/logo.png" class="img-fluid" alt="Logo">
+                        <img style="width: 142px;" src="{{ asset('assets2/img/logo.png') }}" class="img-fluid" alt="Logo">
                     </a>
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
                         <a href="index.html" class="menu-logo">
-                            <img style="width: 142px;" src="assets2/img/logo.png" class="img-fluid" alt="Logo">
+                            <img style="width: 142px;" src="{{ asset('assets2/img/logo.png') }}" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);"> <i
                                 class="fas fa-times"></i>
@@ -116,7 +116,7 @@
 
                         <div class="footer-widget footer-about">
                             <div class="footer-logo">
-                                <img style="width: 140px" src="assets2/img/logo.png" alt="logo">
+                                <img style="width: 140px" src="{{ asset('assets2/img/logo.png') }}" alt="logo">
                             </div>
                             <div class="footer-about-content">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

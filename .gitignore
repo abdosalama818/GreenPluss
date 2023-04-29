@@ -3,7 +3,7 @@
 # /public/storage
 /storage/*.key
 /vendor
-/public
+#/public
 /node_modules
 Doctro_admin_website_v5.1.0
 # .env
