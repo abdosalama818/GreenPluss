@@ -1,5 +1,25 @@
 @extends('layout.mainlayout',['activePage' => 'doctors'])
 
+@section('content')
+
+
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{--
 @section('css')
 <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
 <style>
@@ -88,9 +108,9 @@
     }
 
     .paymentDiv {
-        /* width: 148px !important; */
+
         height: 87px !important;
-        /* padding: 1rem !important; */
+
         cursor: pointer;
     }
 
@@ -105,8 +125,8 @@
     }
 </style>
 @endsection
-
-@section('content')
+ --}}
+{{-- @section('content')
 <div class="xl:w-3/4 mx-auto">
     <div class="xsm:mx-4 xxsm:mx-5 pt-10 mb-10 ">
         <h1 class="font-fira-sans font-medium text-4xl text-left leading-10 pb-5">{{__('Appointment Booking')}}</h1>
@@ -199,8 +219,7 @@
                                 <input type="file" name="report_image[]" class="drop-zone__input">
                                 <h1 class="drop-zone__prompt font-fira-sans font-normal text-center text-xs leading-3 py-2">{{__('Drop your image or')}} <span class="text-primary">{{__('Browse')}}</span></h1>
                                 <p class="drop-zone__prompt font-fira-sans font-normal text-center text-xs leading-3 text-gray">{{__('Support: JPEG, PNG')}}</p>
-                                {{-- <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                            <input type="file" name="myFile" class="drop-zone__input"> --}}
+
                             </div>
                         </div>
                         <div>
@@ -427,7 +446,7 @@
                         <div>
                             <div class="border !border-t-0 !border-white-light p-10">
                                 <img class="2xl:w-28 2xl:h-28 1xl:w-28 1xl:h-28 xlg:h-24 xlg:w-24 xl:h-24 xl:w-24 lg:h-24 lg:w-24 xxmd:w-24 xxmd:h-24 md:h-20 md:w-20 sm:h-20 sm:w-20 xsm:h-16 xsm:w-16 msm:h-24 msm:w-24 xxsm:h-14 xxsm:w-14 border border-primary rounded-full p-0.5 m-auto" src="{{ url($doctor->fullImage) }}" alt="" />
-                                {{-- <img class="!2xl:w-28 !2xl:h-28 !1xl:w-28 !1xl:h-28 !xlg:h-24 !xlg:w-24 !xl:h-24 !xl:w-24 !lg:h-24 !lg:w-24 !xxmd:w-24 !xxmd:h-24 !md:h-20 !md:w-20 !sm:h-20 !sm:w-20 !xsm:h-16 !xsm:w-16 !msm:h-24 !msm:w-24 !xxsm:h-14 !xxsm:w-14 border border-primary rounded-full p-0.5 m-auto" src="{{ url($doctor->fullImage) }}"alt="" /> --}}
+
                                 <h5 class="font-fira-sans font-normal text-lg leading-6 text-black text-center md:text-md pt-5">{{ $doctor->name }}</h5>
                                 <p class="font-normal leading-4 text-sm text-primary text-center font-fira-sans md:text-md py-2">{{ $doctor['category']['name'] }}</p>
                                 <p class="font-fira-sans font-normal leading-4 text-sm text-gray text-center md:text-md"><i class="fa-solid fa-star text-yellow"></i> {{ $doctor['rate'] }}&nbsp;({{ $doctor['review'] }}{{ __(' reviews') }})</p>
@@ -460,7 +479,7 @@
             <button type="button" data-te-ripple-init data-te-ripple-color="light" class="!text-white !bg-primary text-center text-base font-normal font-fira-sans w-32 h-11" id="next">{{ __('Next')}}</button>
             <a href="javascript:void(0)" data-te-ripple-init data-te-ripple-color="light" onclick="booking()" id="payment" class="!text-white !bg-primary text-center w-32 h-11 text-base font-normal font-fira-sans hidden pt-2" type="button">{{ __('Proceed To Pay') }}</a>
         </div>
-    </div>  
+    </div>
 
     <div data-te-modal-init class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollable" aria-modal="true" role="dialog">
         <div data-te-modal-dialog-ref class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
@@ -525,3 +544,7 @@
     });
 </script>
 @endsection
+ --}}
+
+
+

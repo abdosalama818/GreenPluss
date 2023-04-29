@@ -116,12 +116,12 @@
                     <div class="doctor-widget">
                         <div class="doc-info-left">
                             <div class="doctor-img">
-                                <img src="assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+                                <img src="{{ asset('assets2/img/doctors/doctor-thumb-02.jpg') }}" class="img-fluid" alt="User Image">
                             </div>
                             <div class="doc-info-cont mar">
-                                <h4 class="doc-name">د.احمد كارم </h4>
-                                <p class="doc-speciality">تخصص جراحه انف واذن وحنجره</p>
-                                <p class="doc-department"><img src="assets/img/specialities/specialities-05.png"
+                                <h4 class="doc-name">د . {{ $doctor->name }}  </h4>
+                                <p class="doc-speciality">  {{ $doctor->expertise->name }}</p>
+                                <p class="doc-department"><img src="{{ asset('assets2/img/specialities/specialities-05.png') }}"
                                                                class="img-fluid" alt="Speciality">التصنيف</p>
                                 <div class="rating">
                                     <i class="fas fa-star filled"></i>
@@ -136,23 +136,23 @@
                                             href="javascript:void(0);">مشاهده علي الخريطه</a></p>
                                     <ul class="clinic-gallery">
                                         <li>
-                                            <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                <img src="assets/img/features/feature-01.jpg" alt="Feature">
+                                            <a href="{{ asset('assets2/img/features/feature-01.jpg') }}" data-fancybox="gallery">
+                                                <img src="{{ asset('assets2/img/features/feature-01.jpg') }}" alt="Feature">
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-                                                <img src="assets/img/features/feature-02.jpg" alt="Feature Image">
+                                            <a href="{{ asset('assets2/img/features/feature-02.jpg') }}" data-fancybox="gallery">
+                                                <img src="{{ asset('assets2/img/features/feature-02.jpg') }}" alt="Feature Image">
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">
-                                                <img src="assets/img/features/feature-03.jpg" alt="Feature">
+                                            <a href="{{ asset('assets2/img/features/feature-03.jpg') }}" data-fancybox="gallery">
+                                                <img src="{{ asset('assets2/img/features/feature-03.jpg') }}" alt="Feature">
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">
-                                                <img src="assets/img/features/feature-04.jpg" alt="Feature">
+                                            <a href="{{ asset('') }}assets2/img/features/feature-04.jpg" data-fancybox="gallery">
+                                                <img src="{{ asset('') }}assets2/img/features/feature-04.jpg" alt="Feature">
                                             </a>
                                         </li>
                                     </ul>
@@ -169,7 +169,7 @@
                                     <li><i class="far fa-thumbs-up"></i> 99%</li>
                                     <li><i class="far fa-comment"></i> 35 رأي</li>
                                     <li><i class="fas fa-map-marker-alt"></i> مصر ,الاسكندريه</li>
-                                    <li><i class="far fa-money-bill-alt"></i> 100 جنيه للكشف</li>
+                                    <li><i class="far fa-money-bill-alt"></i> {{ $doctor->appointment_fees }} جنيه للكشف</li>
                                 </ul>
                             </div>
                             <div class="doctor-action">
@@ -178,7 +178,7 @@
                                 </a>
                             </div>
                             <div class="clinic-booking">
-                                <a class="apt-btn" href="booking.html">حجز موعد</a>
+                                <a class="apt-btn" href="{{ url('booking/'.$doctor->id.'/'.Str::slug($doctor->name)) }}">حجز موعد</a>
                             </div>
                         </div>
                     </div>
@@ -215,13 +215,7 @@
 
                                     <div class="widget about-widget">
                                         <h4 class="widget-title">معلومات عن د.احمد كارم</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                            non proident, sunt in culpa qui officia deserunt mollit anim id est
-                                            laborum.</p>
+                                        <p>{{ $doctor->desc }}</p>
                                     </div>
 
 
@@ -252,30 +246,30 @@
                                                             href="javascript:void(0);">المكان علي الخريطه</a></h5>
                                                 <ul>
                                                     <li>
-                                                        <a href="assets/img/features/feature-01.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-01.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-01.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-01.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="assets/img/features/feature-02.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-02.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-02.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-02.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="assets/img/features/feature-03.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-03.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-03.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-03.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="assets/img/features/feature-04.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-04.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-04.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-04.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
@@ -336,30 +330,30 @@
                                                             href="javascript:void(0);">المكان علي الخريطه</a></p>
                                                 <ul>
                                                     <li>
-                                                        <a href="assets/img/features/feature-01.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-01.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-01.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-01.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="assets/img/features/feature-02.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-02.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-02.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-02.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="assets/img/features/feature-03.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-03.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-03.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-03.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="assets/img/features/feature-04.jpg"
+                                                        <a href="{{ asset('assets2/img/features/feature-04.jpg') }}"
                                                            data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-04.jpg"
+                                                            <img src="{{ asset('assets2/img/features/feature-04.jpg') }}"
                                                                  alt="Feature Image">
                                                         </a>
                                                     </li>
@@ -411,7 +405,7 @@
                                     <li>
                                         <div class="comment">
                                             <img class="avatar avatar-sm rounded-circle" alt="User Image"
-                                                 src="assets/img/patients/patient.jpg">
+                                                 src="{{ asset('assets2/img/patients/patient.jpg') }}">
                                             <div class="comment-body">
                                                 <div class="meta-data">
                                                     <span class="comment-author">احمد كارم</span>
@@ -430,7 +424,7 @@
                                     <li>
                                         <div class="comment">
                                             <img class="avatar avatar-sm rounded-circle" alt="User Image"
-                                                 src="assets/img/patients/patient.jpg">
+                                                 src="{{ asset('assets2/img/patients/patient.jpg') }}">
                                             <div class="comment-body">
                                                 <div class="meta-data">
                                                     <span class="comment-author">احمد كارم</span>
@@ -449,7 +443,7 @@
                                     <li>
                                         <div class="comment">
                                             <img class="avatar avatar-sm rounded-circle" alt="User Image"
-                                                 src="assets/img/patients/patient.jpg">
+                                                 src="{{ asset('assets2/img/patients/patient.jpg') }}">
                                             <div class="comment-body">
                                                 <div class="meta-data">
                                                     <span class="comment-author">احمد كارم</span>
@@ -592,7 +586,7 @@
 
                         <div class="footer-widget footer-about">
                             <div class="footer-logo">
-                                <img style="width: 140px" src="assets/img/logo.png" alt="logo">
+                                <img style="width: 140px" src="{{ asset('assets2/img/logo.png') }}" alt="logo">
                             </div>
                             <div class="footer-about-content">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

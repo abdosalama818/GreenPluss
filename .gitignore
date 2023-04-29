@@ -4,7 +4,7 @@
 /storage/*.key
 /vendor
 #/public
-/node_modules
+#/node_modules
 Doctro_admin_website_v5.1.0
 # .env
 .env.backup
