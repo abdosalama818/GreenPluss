@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\WorkingHour;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Doctor extends Model
 {
@@ -20,10 +21,21 @@ class Doctor extends Model
         return url('images/upload').'/'.$this->image;
     }
 
+
+
+    public function WorkingHours()
+    {
+        return $this->hasMany(WorkingHour::class,'doctor_id');
+    }
+
+
     public function expertise()
     {
         return $this->belongsTo('App\Models\Expertise');
     }
+
+
+
 
     public function treatment()
     {

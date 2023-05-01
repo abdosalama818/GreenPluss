@@ -1,39 +1,136 @@
-@extends('layout.mainlayout',['activePage' => 'signup'])
 
-@section('css')
-<link rel="stylesheet" href="{{ url('assets/css/intlTelInput.css') }}" />
-<style>
-    .signupDiv.active {
-        border-color: var(--site_color);
-    }
+<!DOCTYPE html>
+<html lang="en" class="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Green Plus</title>
 
-    .signupDiv.active div {
-        border: var(--site_color);
-    }
+    <link href="{{ asset('assets2/img/logo.png') }}" rel="icon">
 
-    .signupDiv.active label {
-        color: black
-    }
+    <link rel="stylesheet" href="{{ asset('assets2/css/bootstrap.min.css') }}">
 
-    .nav-tabs .nav-item .nav-link.active {
-        border: 1px solid var(--site_color) !important;
-        color: black !important;
-    }
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/all.min.css') }}">
 
-    .iti {
-        display: block !important;
-    }
+    <link rel="stylesheet" href="{{ asset('assets2/css/feather.css') }}">
 
-    .hide {
-        display: none;
-    }
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fancybox/jquery.fancybox.min.css') }}">
 
-    /* .contentDisplay .active
-    {
-        display: block;
-    } */
-</style>
-@endsection
+    <link rel="stylesheet" href="{{ asset('assets2/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/rtl.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="main-wrapper">
+
+
+    @include('layout.header-top_rtl')
+
+    @include('layout.nav_site')
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+
+                    <div class="account-content">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-md-7 col-lg-6 login-left">
+                                <img src="assets/img/login-banner.png" class="img-fluid" alt="Doccure Register">
+                            </div>
+                            <div class="col-md-12 col-lg-6 login-right">
+                                <div class="login-header">
+                                    <h3>Patient Register</h3>
+                                </div>
+
+                                <form action="{{ url('signUp') }}" method="post">
+                                    <input type="hidden" name="from" value="patient">
+                                    @csrf
+                                    <div class="form-group form-focus">
+                                        <input name="name" type="text" class="form-control floating">
+                                        <label class="focus-label">Name</label>
+                                        @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group form-focus">
+                                        <input  name="phone" type="text" class="form-control floating">
+                                        <label class="focus-label">Mobile Number</label>
+                                        @error('phone')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group form-focus">
+                                        <input name="email" type="email" class="form-control floating">
+                                        <label class="focus-label">Your Email Address</label>
+                                        @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group form-focus">
+                                        <input  type="password" name="password"type="text" class="form-control floating">
+                                        <label class="focus-label">Password </label>
+                                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                                    </div>
+
+
+                                    <div class="text-end">
+                                        <a class="forgot-link" href="login.html">Already have an account?</a>
+                                    </div>
+                                    <button class="btn btn-primary w-100 btn-lg login-btn" type="submit">Signup</button>
+                                    <div class="login-or">
+                                        <span class="or-line"></span>
+                                        <span class="span-or">or</span>
+                                    </div>
+                                    <div class="row form-row social-login">
+                                        <div class="col-6">
+                                            <a href="#" class="btn btn-facebook w-100"><i
+                                                    class="fab fa-facebook-f me-1"></i> Login</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="#" class="btn btn-google w-100"><i class="fab fa-google me-1"></i>
+                                                Login</a>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+   @include('layout.footer_site')
+
+
+
+
+
+
+
+{{-- @extends('layout.mainlayout',['activePage' => 'signup'])
+
 
 @section('content')
 
@@ -276,4 +373,4 @@
         $('input[name=phone_code]').val('+' + docphoneInput.getSelectedCountryData().dialCode);
     });
 </script>
-@endsection
+@endsection --}}

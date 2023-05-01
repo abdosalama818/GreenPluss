@@ -1,113 +1,287 @@
-@extends('layout.mainlayout',['activePage' => 'pharmacy'])
+<!DOCTYPE html>
+<html lang="en" class="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Green Plus</title>
 
-@section('css')
-<style>
-    .mainDiv .hoverDoc {
-            display: none;
-        }
+    <link href="{{ asset('assets2/img/logo.png') }}" rel="icon">
 
-        .mainDiv:hover .mainDiv1 {
-            display: none;
-        }
+    <link rel="stylesheet" href="{{ asset('assets2/css/bootstrap.min.css') }}">
 
-        .mainDiv:hover .hoverDoc,
-        .mainDiv1 {
-            display: block;
-        }
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/all.min.css') }}">
 
-</style>
-@endsection
+    <link rel="stylesheet" href="{{ asset('assets2/css/feather.css') }}">
 
-@section('content')
-{{-- Your Home For Health --}}
-<div class="pt-14 border-b border-gray-light mb-10 pb-10">
-    <h1 class="font-fira-sans font-semibold text-5xl text-center leading-10">{{__('Your Home For')}} <span class="text-primary">{{__('Health')}}</span></h1>
-    <div class="p-5">
-        <p class="font-fira-sans font-normal text-lg text-center leading-5 text-gray">{{__('Find Better. Appoint Better')}}</p>
-    </div>
-    {{-- Search bar --}}
-    <form id="searchForm" method="post">
-        @csrf
-        <div class="flex justify-center  2xl:flex-row xl:flex-row xlg:flex-row lg:flex-row xmd:flex-row md:flex-row sm:flex-row msm:flex-col
-        xsm:flex-col xxsm:flex-col space-x-5 xmd:space-y-0 sm:space-y-0 sm:space-x-5 msm:space-x-0 xsm:space-x-0 xxsm:space-x-0 msm:p-5 msm:space-y-2 xsm:space-y-2 xsm:p-5
-        xxsm:space-y-2 xxsm:p-2">
-            <div class="relative">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fancybox/jquery.fancybox.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/rtl.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="main-wrapper">
+
+
+    @include('layout.header-top_rtl')
+
+    @include('layout.nav_site')
+
+
+    <div class="breadcrumb-bar-six">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12 col-12">
+                    <h2 class="breadcrumb-title">الصيدليات</h2>
                 </div>
-                <input type="search" name="search_pharmacy" id="search_pharmacy" class="block p-2 pl-10 text-sm bg-white-50 border border-white-light 2xl:w-96 xmd:w-72 !sm:w-36 h-12" placeholder="Search Pharmacy..." required>
             </div>
-            <input type="hidden" name="from" value="js">
-            <div class="relative">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <i class="fa-solid fa-location-dot"></i>
-                </div>
-                <input type="search" name="address" onFocus="geolocate()" id="autocomplete" class="block p-2 pl-10 text-sm bg-white-50 border border-white-light 2xl:w-96 xmd:w-72 !sm:w-36 h-12" placeholder="Set your location" required>
-                <input type="hidden" name="pharmacy_lat">
-                <input type="hidden" name="pharmacy_lang">
-            </div>
-            <button type="button" onclick="searchPharmacy()" data-te-ripple-init data-te-ripple-color="light"  class="text-white bg-primary text-center px-6 py-2 text-base font-normal leading-5 font-fira-sans sm:w-32 msm:w-32 xsm:w-32 xxsm:w-32 h-12"><i class="fa-solid fa-magnifying-glass"></i> {{__('Search')}}</button>
-        </div>
-    </form>
-</div>
-
-<div class="xl:w-3/4 mx-auto ">
-    <div class="flex pt-5 2xl:flex-row xl:flex-row xlg:flex-row lg:flex-row xmd:flex-row md:flex-row sm:flex-row xsm:flex-col xxsm:flex-col">
-        {{-- side bar --}}
-        <div class="2xl:w-1/4 xl:w-1/4 xlg:w-1/4 lg:w-1/4 px-4 space-y-7 py-5 sm:w-60">
-            <form id="filter_form">
-                <div>
-                    <h1 class="font-fira-sans font-medium text-base leading-5 text-black-dark">{{__('Categories')}}</h1>
-
-                    <div class="form-check p-1">
-                        <input class="form-check-input appearance-none h-4 w-4 border border-gray-light rounded-sm bg-white-50 checked:bg-primary checked:border-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" name="select_specialist" type="checkbox" value="popular" id="popular">
-                        <label class="form-check-label font-fira-sans font-normal text-sm leading-4 inline-block text-gray-800" for="popular">
-                            {{ __('Popular') }}
-                        </label>
-                    </div>
-                    <div class="form-check p-1">
-                        <input class="form-check-input appearance-none h-4 w-4 border border-gray-light rounded-sm bg-white-50 checked:bg-primary checked:border-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" name="select_specialist" type="checkbox" value="latest" id="latest">
-                        <label class="form-check-label font-fira-sans font-normal text-sm leading-4 inline-block text-gray-800" for="latest">
-                            {{ __('Latest') }}
-                        </label>
-                    </div>
-                    <div class="form-check p-1">
-                        <input class="form-check-input appearance-none h-4 w-4 border border-gray-light rounded-sm bg-white-50 checked:bg-primary checked:border-primary focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" name="select_specialist" type="checkbox" value="availability" id="availability">
-                        <label class="form-check-label font-fira-sans font-normal text-sm leading-4 inline-block text-gray-800" for="availability">
-                            {{ __('Availability') }}
-                        </label>
-                    </div>
-                </div>
-            </form>
-        </div>
-        {{-- center images --}}
-        <div class="w-full xxsm:p-5 xl:p-0 2xl:p-0">
-        @if (count($pharmacies['data'])>0)
-            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xlg:grid-cols-3 dispPharmacy">
-                @include('website.display_pharmacy')
-            </div>
-        @else
-            <div class="flex justify-center mt-10 font-fira-sans font-normal text-base text-gray">
-                {{__('No Data Avalaible')}}
-            </div>
-        @endif
         </div>
     </div>
-    {{-- view more --}}
-    @if (count($pharmacies)>0)
-        @if ($pharmacies['current_page'] != $pharmacies['last_page'])
-            <div class="flex justify-center pt-8 pb-32 2xl:ml-64 xl:ml-72 xlg:ml-64 lg:ml-54 xmd:ml-44 sm:ml-20 xsm:ml-5 xxsm:ml-4">
-                <div class="sm:py-3 md:py-0 msm:py-3 xsm:py-3 xxsm:py-3" id="">
-                    <button id="more-doctor" type="button" data-te-ripple-init data-te-ripple-color="light" class="text-sm font-normal font-fira-sans leading-4 md:text-sm text-primary border border-primary text-center py-3.5 px-6">{{__('View More')}}</button>
+
+
+    <div class="content pharmacy-cart-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-xl-3 theiaStickySidebar">
+
+                    <div class="filter-new">
+                        <div class="filter-header">
+                            <h4>التصنيفات </h4>
+                        </div>
+                        <div style="direction: ltr" class="filter-widget filter-checkbox">
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type">
+                                    <span class="checkmark"></span> الادويه
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type">
+                                    <span class="checkmark"></span> Treatment
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type" checked>
+                                    <span class="checkmark"></span> Organic
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type">
+                                    <span class="checkmark"></span> Open 24 hours
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type" checked>
+                                    <span class="checkmark"></span> Home Delivery
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check mb-0">
+                                    <input type="checkbox" name="gender_type" checked>
+                                    <span class="checkmark"></span> Hospital Equipment
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="filter-new">
+                        <div class="filter-header">
+                            <h4>المكان</h4>
+                        </div>
+                        <div class="filter-widget">
+                            <div class="filter-location">
+                                <select class="select">
+                                    <option>الاسكندريه</option>
+                                    <option>القاهره</option>
+                                    <option>البحيره</option>
+                                    <option>الجيزه</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="filter-new">
+                        <div class="filter-header">
+                            <h4>التقييمات</h4>
+                        </div>
+                        <div class="filter-widget filter-checkbox">
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    </span>
+                            </label>
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews" checked>
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    </span>
+                            </label>
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star"></i>
+                                </span>
+                            </label>
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                </span>
+                            </label>
+                            <label class="custom_check w-100 mb-0">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-9 col-xl-9">
+
+                    <div class="filter-info">
+                        <div class="row align-items-center">
+                            <div class="col-md-7 col-12 d-md-block custom-short-by">
+                                <div class="pharm-viewicon">
+                                    <p><span>10</span> matches found for Pharmacy in Los Angeles</p>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-12 d-md-block custom-short-by">
+                                <div class="sort-by sort-byone">
+                                <span class="sortby-fliter">
+                                <select class="select">
+                                <option>Default Sorting</option>
+                                <option class="sorting">Rating</option>
+                                <option class="sorting">Popular</option>
+                                <option class="sorting">Latest</option>
+                                <option class="sorting">Free</option>
+                                </select>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+    @foreach ($pharmacies as $pharmacy)
+
+
+                    <div class="card pharmacy-card">
+                        <div class="card-body">
+                            <div class="doctor-widget pharmacy-widget">
+                                <div class="doc-info-left">
+                                    <div class="doctor-img1">
+                                        <a href="pharmacy-details.html">
+                                            <img src="{{ url($pharmacy['fullImage']) }}" class="img-fluid" alt>
+                                        </a>
+                                        <div class="pharmacy-pro-tags">
+                                            <span class="pharmacy-closed">Closed</span>
+                                        </div>
+                                    </div>
+                                    <div style="padding-right: 10px" class="doc-info-cont">
+                                        <h4 class="doc-name"><a href="{{ url('pharmacy-details/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}">{{ $pharmacy['name'] }}</a></h4>
+                                        <div class="rating">
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span class="d-inline-block average-rating">(256)</span>
+                                        </div>
+                                        <div class="clinic-details">
+                                            <div class="clini-infos">
+                                                <p class="doc-location">
+                                                    <i class="feather-map-pin"></i>  {{ $pharmacy['address'] }}
+                                                </p>
+                                                <p class="doc-location text-ellipse">
+                                                    <i class="feather-tag"></i>  {{ $pharmacy['phone'] }}
+                                                </p>
+                                                <p class="doc-location">
+                                                    <i class="feather-clock"></i>start {{ $pharmacy['start_time'] }} -end {{ $pharmacy['end_time'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="pharmacy-booking">
+                                            <a class="btn view-details-btn" href="{{ url('pharmacy-details/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}">المزيد من التفاصيل</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    @endforeach
+
+
+                    <div class="col-md-12 text-center">
+                        <div class="product-pagination pharmacy-search-pagination">
+                            <nav>
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="javascript:void(0);" tabindex="-1"><i
+                                                class="fas fa-angle-left"></i></a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0);">1</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="javascript:void(0);">2 <span class="visually-hidden">(current)</span></a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0);">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0);"><i
+                                                class="fas fa-angle-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        @endif
-    @else
-    @endif
-</div>
-@endsection
+        </div>
+    </div>
 
-@section('js')
-<script src="https://maps.googleapis.com/maps/api/js?key={{ App\Models\Setting::first()->map_key }}&sensor=false&libraries=places"></script>
-<script src="{{ url('assets/js/pharmacy.js') }}"></script>
-@endsection
+
+ @include('layout.footer_site')

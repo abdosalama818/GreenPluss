@@ -27,6 +27,7 @@
                                     <div class="col-md-12 col-lg-12">
                                         <div class="form-group">
                                             <label>انا ابحث عن دكتور</label>
+
                                             <select class="select form-control text-rtl">
                                                 <option>اختر التخصص</option>
                                                 <option>اسم التخصص</option>
@@ -135,7 +136,7 @@
                                     <a href='{{ url('doctor-profile/'.$doctor['id'].'/'.Str::slug($doctor['name'])) }}' class="btn view-btn">View Profile</a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="booking.html" class="btn book-btn">Book Now</a>
+                                    <a href="{{ url('booking/'.$doctor['id'].'/'.Str::slug($doctor['name'])) }}" class="btn book-btn">Book Now</a>
                                 </div>
                             </div>
                         </div>

@@ -73,9 +73,13 @@ Route::get('/clear-cache',function ()
 Route::group(['middleware' => ['XssSanitizer']], function ()
 {
     Route::get('/',[WebsiteController::class,'index']);
-    Route::any('/show-doctors',[WebsiteController::class,'doctor']);
+   /*  Route::any('/show-doctors',[WebsiteController::class,'doctor']); */ //old
+    Route::any('/show-alldoctors',[WebsiteController::class,'doctors']); //new
     Route::get('/doctor-profile/{id}/{name}',[WebsiteController::class,'doctor_profile']);
-    Route::any('/all-pharmacies',[WebsiteController::class,'pharmacy']);
+   // Route::any('/all-pharmacies',[WebsiteController::class,'pharmacy']); old
+    Route::get('/all-pharmacies',[WebsiteController::class,'pharmacies']); //new
+    Route::get('/contact_site',[WebsiteController::class,'contact_site']); //new
+
     Route::any('/all-labs',[WebsiteController::class,'labs']);
     Route::get('/signup',[WebsiteController::class,'signup']);
     Route::any('/patient-login',[WebsiteController::class,'patientLogin']);

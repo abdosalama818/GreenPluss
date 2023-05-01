@@ -47,6 +47,29 @@ use Spatie\Permission\Models\Role;
 
 class WebsiteController extends Controller
 {
+
+
+
+    public function doctors(){
+        $doctors = Doctor::all();
+
+        return view('website.display_doctors',compact('doctors'));
+
+    }
+
+    public function contact_site(){
+
+        return view('website.contact_us');
+
+    }
+
+    public function pharmacies(){
+        $pharmacies =Pharmacy::all();
+        return view('website.pharmacy',compact('pharmacies'));
+
+    }
+
+
     public function index()
     {
         if(env('DB_DATABASE') == "")
@@ -65,14 +88,14 @@ class WebsiteController extends Controller
         $request->validate([
             'name' => 'bail|required',
             'email' => 'bail|required|email|unique:users',
-            'dob' => 'bail|required|date_format:d/m/Y|before:'.Carbon::now(env('timezone'))->format('d/m/Y'),
-            'gender' => 'bail|required',
+           /*  'dob' => 'bail|required|date_format:d/m/Y|before:'.Carbon::now(env('timezone'))->format('d/m/Y'),
+            'gender' => 'bail|required', */
             'phone' => 'bail|required|numeric|digits_between:6,12',
             'password' => 'bail|required|min:6'
-        ],
+        ]/* ,
         [
             'dob.before' => 'Date is invalid.',
-        ]);
+        ] */);
         $data = $request->all();
         $verification = Setting::first()->verification;
         $verify = $verification == 1 ? 0 : 1;
@@ -82,11 +105,11 @@ class WebsiteController extends Controller
             'password' => Hash::make($request->password),
             'verify' => $verify,
             'phone' => $data['phone'],
-            'phone_code' => $data['phone_code'],
+           /*  'phone_code' => $data['phone_code'], */
             'image' => 'defaultUser.png',
             'status' => 1,
-            'dob' => Carbon::createFromFormat('d/m/Y', $data['dob'])->format('d-m-Y'),
-            'gender' => $data['gender']
+           /*  'dob' => Carbon::createFromFormat('d/m/Y', $data['dob'])->format('d-m-Y'),
+            'gender' => $data['gender'] */
         ]);
         Auth::loginUsingId($user->id);
 
@@ -412,12 +435,14 @@ class WebsiteController extends Controller
     public function booking($id,$name)
     {
         $doctor = Doctor::with(['category','expertise'])->find($id);
+        $doctorlist = Doctor::find($id);
         $patient_addressess = UserAddress::where('user_id',auth()->user()->id)->get();
-        $today_timeslots = (new CustomController)->timeSlot($id,Carbon::today(env('timezone'))->format('Y-m-d'));
+        $today_timeslots = (new CustomController)->timeSlot($id,Carbon::today('Africa/Cairo')->format('Y-m-d'));
         $doctor->hospital = (new CustomController)->getHospital($id);
+        $today_date =  WorkingHour::where('doctor_id',$id)->get();
         $setting = Setting::first();
         $currency = $setting->currency_symbol;
-        return view('website.appointment_booking',compact('doctor','patient_addressess','today_timeslots','currency','setting'));
+        return view('website.appointment_booking',compact('doctorlist','doctor','patient_addressess','today_timeslots','currency','setting','today_date'));
     }
 
     public function pharmacy(Request $request)

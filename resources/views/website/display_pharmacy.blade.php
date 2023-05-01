@@ -1,122 +1,287 @@
-@if (count($pharmacies) > 0)
-@if (isset($pharmacies['data']))
-@php
-$data = $pharmacies['data'];
-@endphp
-@else
-@php
-$data = $pharmacies;
-@endphp
-@endif
+<!DOCTYPE html>
+<html lang="en" class="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Green Plus</title>
 
-@foreach ($data as $pharmacy)
-<div class="border border-white-light mainDiv xxsm:mx-0">
-    <div class="mainDiv1 xlg:py-8 lg:py-7 xxsm:px-2 xxsm:py-10 1xl:h-[350px] xxmd:h-[300px] xmd:h-[300px] msm:h-[300px]">
-        <img class="1xl:mt-8 msm:mt-0 xsm:mt-0 xxsm:mt-0 border-2 border-primary rounded-full p-0.5 m-auto mt-12 object-cover w-36 h-36" src="{{ url($pharmacy['fullImage']) }}" alt="" style="display: flex !important;" />
-        <h5 class="font-fira-sans font-normal text-lg leading-6 text-black text-center md:text-md pt-5">
-            {{ $pharmacy['name'] }}
-        </h5>
-        <p class="font-normal leading-4 text-sm text-center font-fira-sans md:text-md py-2">{{ __('@') }}
-            <span>{{ $pharmacy['email'] }}</span>
-        </p>
-        <div class="font-normal leading-4 text-sm text-primary text-center md:text-md flex justify-center">
-            <svg width="13" height="18" viewBox="0 0 13 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.65449 17.1566C4.75413 17.2346 4.87026 17.2888 4.99402 17.315C5.11779 17.3413 5.24593 17.339 5.36866 17.3082L12.0353 15.6416C12.2158 15.5967 12.376 15.4927 12.4905 15.3462C12.6049 15.1997 12.6671 15.0191 12.667 14.8332V3.16656C12.6669 2.98067 12.6047 2.80014 12.4903 2.65367C12.3758 2.5072 12.2157 2.40321 12.0353 2.35822L5.36866 0.691558C5.24588 0.661433 5.11786 0.659551 4.99425 0.686056C4.87064 0.712561 4.75465 0.766761 4.65501 0.844576C4.55538 0.922392 4.47469 1.0218 4.41903 1.1353C4.36337 1.24881 4.33418 1.37347 4.33366 1.49989V2.33322H1.00033C0.779312 2.33322 0.56735 2.42102 0.41107 2.5773C0.25479 2.73358 0.166992 2.94554 0.166992 3.16656V14.8332C0.166992 15.0542 0.25479 15.2662 0.41107 15.4225C0.56735 15.5788 0.779312 15.6666 1.00033 15.6666H4.33366V16.4999C4.33366 16.7566 4.45199 16.9991 4.65449 17.1566ZM6.00033 2.56739L11.0003 3.81739V14.1824L6.00033 15.4324V2.56739ZM1.83366 13.9999V3.99989H4.33366V13.9999H1.83366Z">
-                </path>
-                <path d="M7.86801 9.96602C8.23967 9.87268 8.49967 9.53935 8.49967 9.15685V8.84268C8.49956 8.62167 8.41166 8.40975 8.2553 8.25355C8.09894 8.09735 7.88694 8.00966 7.66592 8.00977C7.44491 8.00988 7.23299 8.09778 7.07679 8.25414C6.92059 8.4105 6.8329 8.6225 6.83301 8.84352V9.15768C6.83304 9.28426 6.86191 9.40917 6.91743 9.52293C6.97295 9.63669 7.05365 9.73631 7.15341 9.81422C7.25317 9.89213 7.36937 9.9463 7.49319 9.9726C7.61701 9.9989 7.74519 9.99665 7.86801 9.96602Z">
-                </path>
-            </svg>
-            <p class="ml-2">
-                {{ __(' Opens At') }}{{ $pharmacy['openTime'] }}
-            </p>
+    <link href="{{ asset('assets2/img/logo.png') }}" rel="icon">
 
+    <link rel="stylesheet" href="{{ asset('assets2/css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/all.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/css/feather.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fancybox/jquery.fancybox.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/rtl.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="main-wrapper">
+
+
+    @include('layout.header-top_rtl')
+
+    @include('layout.nav_site')
+
+
+    <div class="breadcrumb-bar-six">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12 col-12">
+                    <h2 class="breadcrumb-title">الصيدليات</h2>
+                </div>
+            </div>
         </div>
-
     </div>
 
-    <!-- <div class="hoverDoc shadow-2xl overflow-hidden">
-        <div class="w-full 1xl:h-[350px] xxmd:h-[300px] xmd:h-[300px] msm:h-[300px] xsm:h-[300px] xxsm:h-[300px] p-5">
-            <div class="flex flex-col items-center">
-                <div class="flex">
-                    <img class="2xl:w-16 2xl:h-16 xlg:h-16 xlg:w-16 xl:h-16 xl:w-16 lg:h-16 lg:w-16 xxmd:w-16 xxmd:h-16 md:h-16 md:w-16 sm:h-10 sm:w-10 xsm:h-10 xsm:w-10 msm:h-14
-                            msm:w-14 xxsm:h-14 xxsm:w-14  border border-primary rounded-full p-0.5 mx-5 object-cover bg-cover" src="{{ url($pharmacy['fullImage']) }}" alt="" />
-                    <div class="flex flex-col justify-start">
-                        <h5 class="font-fira-sans font-normal text-xl xl:text-sm leading-6 text-black-dark">
-                            {{ $pharmacy['name'] }}
-                        </h5>
-                        <p class="font-normal leading-4 text-sm text-gray text-center xl:text-sm md:text-md pt-3">
-                        <div class="font-normal leading-4 text-sm text-primary text-center md:text-md flex justify-center">
-                            <svg width="13" height="18" viewBox="0 0 13 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.65449 17.1566C4.75413 17.2346 4.87026 17.2888 4.99402 17.315C5.11779 17.3413 5.24593 17.339 5.36866 17.3082L12.0353 15.6416C12.2158 15.5967 12.376 15.4927 12.4905 15.3462C12.6049 15.1997 12.6671 15.0191 12.667 14.8332V3.16656C12.6669 2.98067 12.6047 2.80014 12.4903 2.65367C12.3758 2.5072 12.2157 2.40321 12.0353 2.35822L5.36866 0.691558C5.24588 0.661433 5.11786 0.659551 4.99425 0.686056C4.87064 0.712561 4.75465 0.766761 4.65501 0.844576C4.55538 0.922392 4.47469 1.0218 4.41903 1.1353C4.36337 1.24881 4.33418 1.37347 4.33366 1.49989V2.33322H1.00033C0.779312 2.33322 0.56735 2.42102 0.41107 2.5773C0.25479 2.73358 0.166992 2.94554 0.166992 3.16656V14.8332C0.166992 15.0542 0.25479 15.2662 0.41107 15.4225C0.56735 15.5788 0.779312 15.6666 1.00033 15.6666H4.33366V16.4999C4.33366 16.7566 4.45199 16.9991 4.65449 17.1566ZM6.00033 2.56739L11.0003 3.81739V14.1824L6.00033 15.4324V2.56739ZM1.83366 13.9999V3.99989H4.33366V13.9999H1.83366Z">
-                                </path>
-                                <path d="M7.86801 9.96602C8.23967 9.87268 8.49967 9.53935 8.49967 9.15685V8.84268C8.49956 8.62167 8.41166 8.40975 8.2553 8.25355C8.09894 8.09735 7.88694 8.00966 7.66592 8.00977C7.44491 8.00988 7.23299 8.09778 7.07679 8.25414C6.92059 8.4105 6.8329 8.6225 6.83301 8.84352V9.15768C6.83304 9.28426 6.86191 9.40917 6.91743 9.52293C6.97295 9.63669 7.05365 9.73631 7.15341 9.81422C7.25317 9.89213 7.36937 9.9463 7.49319 9.9726C7.61701 9.9989 7.74519 9.99665 7.86801 9.96602Z">
-                                </path>
-                            </svg>&nbsp;
-                            <p class="">
-                                {{ __(' Opens At ') }}{{ $pharmacy['openTime'] }}
-                            </p>
+
+    <div class="content pharmacy-cart-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-xl-3 theiaStickySidebar">
+
+                    <div class="filter-new">
+                        <div class="filter-header">
+                            <h4>التصنيفات </h4>
+                        </div>
+                        <div style="direction: ltr" class="filter-widget filter-checkbox">
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type">
+                                    <span class="checkmark"></span> الادويه
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type">
+                                    <span class="checkmark"></span> Treatment
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type" checked>
+                                    <span class="checkmark"></span> Organic
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type">
+                                    <span class="checkmark"></span> Open 24 hours
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type" checked>
+                                    <span class="checkmark"></span> Home Delivery
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check mb-0">
+                                    <input type="checkbox" name="gender_type" checked>
+                                    <span class="checkmark"></span> Hospital Equipment
+                                </label>
+                            </div>
                         </div>
                     </div>
+
+
+                    <div class="filter-new">
+                        <div class="filter-header">
+                            <h4>المكان</h4>
+                        </div>
+                        <div class="filter-widget">
+                            <div class="filter-location">
+                                <select class="select">
+                                    <option>الاسكندريه</option>
+                                    <option>القاهره</option>
+                                    <option>البحيره</option>
+                                    <option>الجيزه</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="filter-new">
+                        <div class="filter-header">
+                            <h4>التقييمات</h4>
+                        </div>
+                        <div class="filter-widget filter-checkbox">
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    </span>
+                            </label>
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews" checked>
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    </span>
+                            </label>
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star"></i>
+                                </span>
+                            </label>
+                            <label class="custom_check w-100">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                </span>
+                            </label>
+                            <label class="custom_check w-100 mb-0">
+                                <input type="checkbox" name="reviews">
+                                <span class="checkmark"></span>
+                                <span class="rating">
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star filled"></i>
+                                <i class="fas fa-star"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="flex flex-col 1xl:mt-10 xl:mt-3 xlg:mt-2 lg:mt-5 xxmd:mt-5 md:mt-5 sm:mt-5 msm:mt-2 xsm:mt-5 xxsm:mt-2">
-                    <div class="h-44 xl:h-40 xlg:h-20 lg:h-32 xxmd:h-32 md:h-32 sm:h-36 msm:h-36 xsm:h-36 xxsm:h-36">
-                        <p class="font-fira-sans font-normal text-sm leading-4 text-gray text-left"><span><i class="fa-solid fa-phone"></i></span> {{ $pharmacy['phone'] }}</p>
-                        <p class="font-fira-sans font-normal msm:text-sm xxsm:text-xs leading-4 text-gray text-left py-2">
-                            <span class="text-bold ">{{ __('@') }}</span> {{ $pharmacy['email'] }}
-                        </p>
-                        <p class="font-fira-sans font-normal text-sm leading-4 text-gray text-left pt-2 xlg:hidden">
-                            <span><i class="fa-solid fa-location-dot"></i></span> {{ $pharmacy['address'] }}
-                        </p>
+                <div class="col-lg-9 col-xl-9">
 
+                    <div class="filter-info">
+                        <div class="row align-items-center">
+                            <div class="col-md-7 col-12 d-md-block custom-short-by">
+                                <div class="pharm-viewicon">
+                                    <p><span>10</span> matches found for Pharmacy in Los Angeles</p>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-12 d-md-block custom-short-by">
+                                <div class="sort-by sort-byone">
+                                <span class="sortby-fliter">
+                                <select class="select">
+                                <option>Default Sorting</option>
+                                <option class="sorting">Rating</option>
+                                <option class="sorting">Popular</option>
+                                <option class="sorting">Latest</option>
+                                <option class="sorting">Free</option>
+                                </select>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex xl:flex-row xlg:flex-col lg:flex-row">
-                        <a href="{{ url('pharmacy-product/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}" data-te-ripple-init data-te-ripple-color="light" class="font-fira-sans text-white bg-primary hover:bg-primary text-center py-2.5 px-5">{{__('Browse Products')}}</a>
-                        <a href="{{ url('pharmacy-details/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}" data-te-ripple-init data-te-ripple-color="light" class="font-fira-sans text-primary text-sm font-normal leading-4 underline mx-5 py-2">{{__('View Profile')}}</a>
+
+
+
+
+    @foreach ($pharmacies as $pharmacy)
+
+
+                    <div class="card pharmacy-card">
+                        <div class="card-body">
+                            <div class="doctor-widget pharmacy-widget">
+                                <div class="doc-info-left">
+                                    <div class="doctor-img1">
+                                        <a href="pharmacy-details.html">
+                                            <img src="{{ url($pharmacy['fullImage']) }}" class="img-fluid" alt>
+                                        </a>
+                                        <div class="pharmacy-pro-tags">
+                                            <span class="pharmacy-closed">Closed</span>
+                                        </div>
+                                    </div>
+                                    <div style="padding-right: 10px" class="doc-info-cont">
+                                        <h4 class="doc-name"><a href="{{ url('pharmacy-details/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}">{{ $pharmacy['name'] }}</a></h4>
+                                        <div class="rating">
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span class="d-inline-block average-rating">(256)</span>
+                                        </div>
+                                        <div class="clinic-details">
+                                            <div class="clini-infos">
+                                                <p class="doc-location">
+                                                    <i class="feather-map-pin"></i>  {{ $pharmacy['address'] }}
+                                                </p>
+                                                <p class="doc-location text-ellipse">
+                                                    <i class="feather-tag"></i>  {{ $pharmacy['phone'] }}
+                                                </p>
+                                                <p class="doc-location">
+                                                    <i class="feather-clock"></i> {{ $pharmacy['email'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="pharmacy-booking">
+                                            <a class="btn view-details-btn" href="{{ url('pharmacy-details/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}">المزيد من التفاصيل</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+    @endforeach
 
 
-    <div class="hoverDoc bg-white shadow-2xl p-5 relative hover:z-50 xxsm:w-full xxsm:h-[500px] md:h-[300px] xlg:w-[280px] lg:h-[300px] lg:overflow-y-auto xl:w-[250px] 1xl:h-[350px] 1xl:overflow-y-auto 1xl:w-[500px] 1xl:h-[350px] 2xl:w-[560px]">
-
-        <div class="flex items-center xxsm:flex-col md:flex-row lg:flex-col 1xl:flex-row 1xl:mt-10">
-            <div class="1xl:w-[40%] xlg:w-full xxsm:mb-5 xlg:mb-0 md:w-[40%] lg:w-full ">
-                <img class="border-2 border-primary rounded-full p-0.5 object-cover w-36 h-36 mx-auto" src="{{ url($pharmacy['fullImage']) }}" alt="" />
-                <h5 class="font-fira-sans font-normal text-xl leading-6 text-black-dark pt-5 text-center mb-5">{{ $pharmacy['name'] }}</h5>
-                <div class="font-normal leading-4 text-sm text-primary text-center md:text-md flex justify-center">
-                    <svg width="13" height="18" viewBox="0 0 13 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.65449 17.1566C4.75413 17.2346 4.87026 17.2888 4.99402 17.315C5.11779 17.3413 5.24593 17.339 5.36866 17.3082L12.0353 15.6416C12.2158 15.5967 12.376 15.4927 12.4905 15.3462C12.6049 15.1997 12.6671 15.0191 12.667 14.8332V3.16656C12.6669 2.98067 12.6047 2.80014 12.4903 2.65367C12.3758 2.5072 12.2157 2.40321 12.0353 2.35822L5.36866 0.691558C5.24588 0.661433 5.11786 0.659551 4.99425 0.686056C4.87064 0.712561 4.75465 0.766761 4.65501 0.844576C4.55538 0.922392 4.47469 1.0218 4.41903 1.1353C4.36337 1.24881 4.33418 1.37347 4.33366 1.49989V2.33322H1.00033C0.779312 2.33322 0.56735 2.42102 0.41107 2.5773C0.25479 2.73358 0.166992 2.94554 0.166992 3.16656V14.8332C0.166992 15.0542 0.25479 15.2662 0.41107 15.4225C0.56735 15.5788 0.779312 15.6666 1.00033 15.6666H4.33366V16.4999C4.33366 16.7566 4.45199 16.9991 4.65449 17.1566ZM6.00033 2.56739L11.0003 3.81739V14.1824L6.00033 15.4324V2.56739ZM1.83366 13.9999V3.99989H4.33366V13.9999H1.83366Z">
-                        </path>
-                        <path d="M7.86801 9.96602C8.23967 9.87268 8.49967 9.53935 8.49967 9.15685V8.84268C8.49956 8.62167 8.41166 8.40975 8.2553 8.25355C8.09894 8.09735 7.88694 8.00966 7.66592 8.00977C7.44491 8.00988 7.23299 8.09778 7.07679 8.25414C6.92059 8.4105 6.8329 8.6225 6.83301 8.84352V9.15768C6.83304 9.28426 6.86191 9.40917 6.91743 9.52293C6.97295 9.63669 7.05365 9.73631 7.15341 9.81422C7.25317 9.89213 7.36937 9.9463 7.49319 9.9726C7.61701 9.9989 7.74519 9.99665 7.86801 9.96602Z">
-                        </path>
-                    </svg>
-                    <p class="ml-2">
-                        {{ __(' Opens At') }} {{ $pharmacy['openTime'] }}
-                    </p>
-
-                </div>
-            </div>
-            <div class="1xl:w-[60%] xlg:w-full md:w-[60%] lg:w-full xxsm:pl-0 xmd:pl-10 xxsm:ml-0 xlg:pl-0 lg:ml-0 lg:pl-0 1xl:pl-5 md:pl-5 md:border-l-2 md:border-white-light xxsm:border-l-0 lg:border-l-0 xl:border-l-0 xl:pl-0 1xl:border-l-2 h-[200px]">
-                <div>
-                    <div class="md:mb-20 xxsm:mb-5 xsm:mb-6 xlg:mb-5 lg:mb-10 1xl:mb-10 2xl:mb-10 xxsm:mt-0 xlg:mt-4">
-                        <p class="font-fira-sans font-normal text-sm leading-4 text-gray text-left"><span><i class="fa-solid fa-phone"></i></span> {{ $pharmacy['phone'] }}</p>
-                        <p class="font-fira-sans font-normal msm:text-sm xxsm:text-xs leading-4 text-gray text-left py-2">
-                            <span class="text-bold ">{{ __('@') }}</span> {{ $pharmacy['email'] }}
-                        </p>
-                        <p class="font-fira-sans font-normal text-sm leading-4 text-gray text-left pt-2">
-                            <span><i class="fa-solid fa-location-dot"></i></span> {{ $pharmacy['address'] }}
-                        </p>
+                    <div class="col-md-12 text-center">
+                        <div class="product-pagination pharmacy-search-pagination">
+                            <nav>
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="javascript:void(0);" tabindex="-1"><i
+                                                class="fas fa-angle-left"></i></a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0);">1</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="javascript:void(0);">2 <span class="visually-hidden">(current)</span></a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0);">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="javascript:void(0);"><i
+                                                class="fas fa-angle-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                    <div class="flex xl:flex-col xlg:flex-row lg:flex-row xsm:flex-row xxsm:flex-col items-center 1xl:flex-row">
-                        <a href="{{ url('pharmacy-product/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}" data-te-ripple-init data-te-ripple-color="light" class="font-fira-sans text-white bg-primary hover:bg-primary text-sm text-center py-2.5 px-5">{{__('Browse Products')}}</a>
-                        <a href="{{ url('pharmacy-details/'.$pharmacy['id'].'/'.Str::slug($pharmacy['name'])) }}" data-te-ripple-init data-te-ripple-color="light" class="font-fira-sans text-primary text-sm font-normal leading-4 underline py-2 ml-3">{{__('View Profile')}}</a>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endforeach
-@endif
+
+
+ @include('layout.footer_site')

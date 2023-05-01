@@ -1,4 +1,130 @@
-@if (count($doctors) > 0)
+
+<!DOCTYPE html>
+<html lang="en" class="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Green Plus</title>
+
+    <link href="{{ asset('assets2/img/logo.png') }}" rel="icon">
+
+    <link rel="stylesheet" href="{{ asset('assets2/css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fontawesome/css/all.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/css/feather.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/plugins/fancybox/jquery.fancybox.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets2/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/rtl.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+<div class="main-wrapper">
+
+
+    @include('layout.header-top_rtl')
+
+    @include('layout.nav_site')
+
+    <div style="direction: ltr" class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-12 order-md-last order-sm-last order-last map-left">
+                    <div class="row align-items-center mb-4 dir">
+                        <div class="col-md-6 col">
+                            <h4>2245 تم ايجاد</h4>
+                        </div>
+                        <div class="col-md-6 col-auto">
+                            <div class="sort-by d-sm-block d-none">
+                                <select class="form-select">
+                                    <option >ترتيب حسب</option>
+                                    <option class="sorting">التقييم</option>
+                                    <option class="sorting">الانتشار</option>
+                                    <option class="sorting">الاقدم</option>
+                                    <option class="sorting">المجاني</option>
+                                </select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach ($doctors as $doctor)
+                        <div class="col-sm-6 col-md-4 col-xl-6">
+                            <div class="profile-widget">
+                                <div class="doc-img">
+                                    <a href="doctor-profile.html">
+                                        <img class="img-fluid" alt="User Image" src="{{ url($doctor['fullImage']) }}">
+                                    </a>
+                                    <a href="javascript:void(0)" class="fav-btn">
+                                        <i class="far fa-bookmark"></i>
+                                    </a>
+                                </div>
+                                <div class="pro-content dir">
+                                    <h3 class="title">
+                                        <i class="fas fa-check-circle verified"></i>
+                                        <a href="doctor-profile.html">د.  {{$doctor['name'] }}</a>
+                                    </h3>
+                                    <p  style="font-family: 'Cairo', sans-serif !important;" class="speciality text-rtl">  {{$doctor->category->name}} </p>
+                                    <div class="rating">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <span class="d-inline-block average-rating"> {{ $doctor['rate'] }} ({{ $doctor['review']}}{{__(' reviews') }})</span>
+                                    </div>
+                                    <ul class="available-info">
+                                        <li style="font-family: 'Cairo', sans-serif !important;">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </li>
+                                        <li style="font-family: 'Cairo', sans-serif !important;">
+                                            <i class="far fa-clock"></i> متاح من الأحد الي الخميس
+                                        </li>
+                                        <li style="font-family: 'Cairo', sans-serif !important;">
+                                            <i class="far fa-money-bill-alt"></i>    {{ $doctor['appointment_fees'] }}  <i
+                                                class="fas fa-info-circle" data-bs-toggle="tooltip"
+                                                title="Lorem Ipsum"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="row row-sm">
+                                        <div class="col-6">
+                                            <a style="font-family: 'Cairo', sans-serif !important;" href={{ url('doctor-profile/'.$doctor['id'].'/'.Str::slug($doctor['name'])) }}" class="btn view-btn">دخول الملف الشخصي </a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a style="font-family: 'Cairo', sans-serif !important;" href="{{ url('booking/'.$doctor['id'].'/'.Str::slug($doctor['name'])) }}" class="btn book-btn">حجز الأن</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
+                </div>
+
+                <div class="col-xl-6 col-lg-12 map-right">
+                    <div id="map" class="map-listing"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    @include('layout.footer_site')
+{{-- @if (count($doctors) > 0)
 @if (isset($doctors['data']))
 @php
 $data = $doctors['data'];
@@ -18,7 +144,7 @@ $data = $doctors;
             $doctor['treatment']['name'] }}</p>
         <p class="font-normal leading-4 text-sm text-gray text-center md:text-md"><i class="fa-solid fa-star text-yellow"></i> {{ $doctor['rate'] }} ({{ $doctor['review'] }}{{__(' reviews')}})</p>
     </div>
-    
+
     <div class="hoverDoc bg-white shadow-2xl p-5 relative hover:z-50 xxsm:w-full xlg:w-[450px] lg:h-[300px] lg:overflow-y-auto xl:w-[685px] 1xl:h-[350px] 1xl:overflow-y-auto">
         <div data-id="{{ $doctor['id'] }}" class="cursor-pointer absolute flex align-center justify-center shadow-2xl bg-white-50 add-favourite p-4 rounded-full text-primary">
             <i class="{{ $doctor['is_fav'] == 'true' ? 'fa fa-bookmark' : 'fa-regular fa-bookmark' }}"></i>
@@ -59,4 +185,4 @@ $data = $doctors;
     </div>
 </div>
 @endforeach
-@endif
+@endif --}}
